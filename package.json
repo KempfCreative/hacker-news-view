@@ -1,0 +1,27 @@
+{
+  "name": "hacker-news-view",
+  "version": "0.0.1",
+  "description": "A fun way to look at top stories from Hacker News!",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KempfCreative/hacker-news-view.git"
+  },
+  "keywords": [
+    "news",
+    "api",
+    "layout"
+  ],
+  "author": "Jonathan Kempf",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KempfCreative/hacker-news-view/issues"
+  },
+  "homepage": "https://github.com/KempfCreative/hacker-news-view#readme"
+}
