@@ -1,5 +1,8 @@
-import topStoriesSorted from './topStories';
+import storyBodyData from './storyBody';
 
-const test = topStoriesSorted.storyArray();
+let articleInfo;
+storyBodyData.getStoryBody().then( stories => {
+	articleInfo = stories;
+});
 
 console.log('JavaScript is amazing!');

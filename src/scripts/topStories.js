@@ -3,8 +3,8 @@ import fetchPromise from './fetchData';
 const TopStories = function () {
   const topStories = {
     storyArray: () => {
-      const fetchIds = fetchPromise.get( 'https://hacker-news.firebaseio.com/v0/topstories.json' );
-      fetchIds.then( response => {
+      return fetchPromise.get( 'https://hacker-news.firebaseio.com/v0/topstories.json' )
+      .then( response => {
         const topStoriesArray = response.slice(1,response.length-1).split(',');
         let topTen,
             topTenObj = {};
@@ -17,9 +17,7 @@ const TopStories = function () {
         topTen = Array.from(Object.keys(topTenObj));
         // Return the new array
         return topTen;
-      });
-      console.log(fetchIds);
-      return fetchIds;
+      }).catch( error => console.error(error) );
     }
   };
   return topStories;
