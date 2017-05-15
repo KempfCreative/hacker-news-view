@@ -7,7 +7,6 @@ const StoryBody = function() {
 		getStoryBody: () => {
 			return storyIdsPromise.then( values => {
 				values.forEach( id => {
-					console.log(id);
 					fetchPromise.get( 'https://hacker-news.firebaseio.com/v0/item/', id )
 					.then( response => {
 						storyBody.setStoryData(response);
@@ -23,10 +22,8 @@ const StoryBody = function() {
 
 		setStoryData: data => {
 			if ( '[object Array]' === Object.prototype.toString.call(storyBody.storyData) && 0 <= storyBody.storyData.length ) {
-				console.log(storyBody);
 				return storyBody.storyData.push(data);
 			} else {
-				console.log(storyBody);
 				return storyBody.storyData = [];
 			}
 		}
