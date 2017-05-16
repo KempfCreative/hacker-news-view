@@ -9,7 +9,7 @@ const StoryBody = function() {
 				values.forEach( id => {
 					fetchPromise.get( 'https://hacker-news.firebaseio.com/v0/item/', id )
 					.then( response => {
-						storyBody.setStoryData(response);
+						storyBody.setStoryData(JSON.parse(response));
 					}).catch( error => console.log(error) )
 				})
 				return storyBody.storyData;

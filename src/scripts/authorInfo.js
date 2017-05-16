@@ -6,12 +6,11 @@ const AuthorInfo = function() {
 	const authorInfo = {
 		getAuthorInfo: () => {
 			return storyBodiesPromise.then( values => {
-				values.forEach( storyBody => {
-					console.log(storyBody);
-					let authorId = JSON.parse(storyBody).by;
+				values.forEach( storyObj => {
+					let authorId = storyObj.by;
 					fetchPromise.get( 'https://hacker-news.firebaseio.com/v0/user/', authorId )
 					.then( response => {
-						authorInfo.setAuthorInfo(response);
+						authorInfo.setAuthorInfo(JSON.parse(response));
 					}).catch( error => console.error(error) );
 				})
 				return authorInfo.authorData;
@@ -22,9 +21,9 @@ const AuthorInfo = function() {
 			return new Array;
 		})(),
 
-		setAuthorInfo: authorInfo => {
+		setAuthorInfo: authorString => {
 			if ( '[object Array]' === Object.prototype.toString.call(authorInfo.authorData) && 0 <= authorInfo.authorData.length ) {
-				return authorInfo.authorData.push(authorInfo);
+				return authorInfo.authorData.push(authorString);
 			} else {
 				return authorInfo.authorData = [];
 			}
@@ -34,4 +33,4 @@ const AuthorInfo = function() {
 }
 
 const authorInfoArray = new AuthorInfo();
-export { authorInfoArray as authorArray, storyBodiesPromise as storiesArray };
+export default authorInfoArray;
