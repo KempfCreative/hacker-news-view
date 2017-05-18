@@ -1,36 +1,40 @@
-import storyBodyData from './storyBody';
 import fetchPromise from './fetchData';
 
-const storyBodiesPromise = storyBodyData.getStoryBody();
+
 const AuthorInfo = function() {
 	const authorInfo = {
-		getAuthorInfo: () => {
-			return storyBodiesPromise.then( values => {
-				values.forEach( storyObj => {
-					let authorId = storyObj.by;
-					fetchPromise.get( 'https://hacker-news.firebaseio.com/v0/user/', authorId )
-					.then( response => {
-						authorInfo.setAuthorInfo(JSON.parse(response));
-					}).catch( error => console.error(error) );
-				})
-				return authorInfo.authorData;
+		getAuthorInfo: ( stories ) => {
+			return new Promise( ( resolve, reject ) => {
+				stories.then( data => {
+					console.log(data);
+					return data.map( singleStory => {
+						fetchPromise.get( 'https://hacker-news.firebaseio.com/v0/user/', singleStory.by )
+						.then( response => {
+							authorInfo.setAuthorInfo( singleStory, JSON.parse(response) );
+						}).catch( error => console.error(error) );
+					})
+				});
 			}).catch( error => console.error(error) );
 		},
 
-		authorData: (function(){
-			return new Array;
+		authorData: (() => {
+			return [];
 		})(),
 
-		setAuthorInfo: authorString => {
-			if ( '[object Array]' === Object.prototype.toString.call(authorInfo.authorData) && 0 <= authorInfo.authorData.length ) {
-				return authorInfo.authorData.push(authorString);
+		setAuthorInfo: ( singleStory, authorObj ) => {
+			if ( '[object Array]' === Object.prototype.toString.call( authorInfo.authorData ) && 0 <= authorInfo.authorData.length ) {
+				console.log(singleStory);
+				console.log(authorObj);
+				singleStory.by = authorObj;
+				authorInfo.authorData.push( singleStory );
+				console.log(authorInfo.authorData);
 			} else {
-				return authorInfo.authorData = [];
+				return authorInfo.authorData.push( {} );
 			}
 		}
 	};
 	return authorInfo;
 }
 
-const authorInfoArray = new AuthorInfo();
-export default authorInfoArray;
+const authorInfoData = new AuthorInfo();
+export default authorInfoData;

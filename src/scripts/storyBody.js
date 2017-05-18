@@ -1,30 +1,39 @@
-import topStoriesSorted from './topStories';
 import fetchPromise from './fetchData';
 
-const storyIdsPromise = topStoriesSorted.storyArray();
 const StoryBody = function() {
 	const storyBody = {
-		getStoryBody: () => {
-			return storyIdsPromise.then( values => {
-				values.forEach( id => {
-					fetchPromise.get( 'https://hacker-news.firebaseio.com/v0/item/', id )
-					.then( response => {
-						storyBody.setStoryData(JSON.parse(response));
-					}).catch( error => console.log(error) )
+		getStoryBody: ( top ) => {
+			return new Promise( ( resolve, reject ) => {
+				top.then( ids => {
+					const storyArray = ids.map( id => {
+						/* running into a race condition where the author calls happen before the story calls happen
+						 * need to have an array of Promises return to storyArray.
+						 * storyArray should be passed into a Promise.all, and .then returns the values to the object.
+						*/
+						return fetchPromise.get( 'https://hacker-news.firebaseio.com/v0/item/', id )
+						.then( response => {
+							storyBody.setStoryData(JSON.parse(response));
+						}).catch( error => console.log(error) );
+					});
+					if ( storyBody.storyData.length === ids.length ) {
+						resolve( storyBody.storyData )
+					} else {
+						console.log( "storyBody storyData length not full" );
+					}
 				})
-				return storyBody.storyData;
 			}).catch( error => console.error(error) );
 		},
 
-		storyData: (function() {
-			return new Array;
+		storyData: (() => {
+			return [];
 		})(),
 
 		setStoryData: data => {
 			if ( '[object Array]' === Object.prototype.toString.call(storyBody.storyData) && 0 <= storyBody.storyData.length ) {
-				return storyBody.storyData.push(data);
+				storyBody.storyData.push(data);
+				// console.log(storyBody.storyData);
 			} else {
-				return storyBody.storyData = [];
+				return storyBody.storyData.push( {} );
 			}
 		}
 	};

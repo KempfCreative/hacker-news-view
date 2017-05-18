@@ -1,3 +1,14 @@
-import formattedResponse from './formatResponses';
-formattedResponse.associateAuthor();
+import topStoriesSorted from './topStories';
+import storyBodyData from './storyBody';
+import authorInfoData from './authorInfo';
+// formattedResponse.associateAuthor( authorInfoData.getAuthorInfo() );
+const top = topStoriesSorted.storyArray();
+// console.log(top);
+const stories = top.then( storyBodyData.getStoryBody( top ) );
+// console.log(top.then( console.log(top) ) );
+console.log(stories.then( console.log(stories) ) );
+const authors = stories.then( authorInfoData.getAuthorInfo( stories ) );
+// console.log(top);
+// console.log(stories.then( console.log(stories) ) );
+// console.log(authors);
 console.log('JavaScript is amazing!');
