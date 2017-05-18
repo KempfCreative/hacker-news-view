@@ -14,6 +14,7 @@ const AuthorInfo = function() {
 						values.forEach( ( response, index ) => {
 							authorInfo.setAuthorInfo( storyData[index], JSON.parse(response) );
 						})
+						console.log("Promise all AUTHOR after forEach");
 					}).catch( error => console.error(error) );
 				}).then( resolved => resolve( authorInfo.authorData ) )
 			}).catch( error => console.error(error) );

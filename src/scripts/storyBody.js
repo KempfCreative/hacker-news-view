@@ -16,7 +16,7 @@ const StoryBody = function() {
 						values.forEach( response => {
 							storyBody.setStoryData( JSON.parse(response) );
 						});
-						console.log("Promise all after forEach");
+						console.log("Promise all STORY after forEach");
 						return resolve(storyBody.storyData);
 					}).catch( error => console.error(error) );
 				})
