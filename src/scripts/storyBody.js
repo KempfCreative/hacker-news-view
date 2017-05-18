@@ -10,16 +10,15 @@ const StoryBody = function() {
 						 * need to have an array of Promises return to storyArray.
 						 * storyArray should be passed into a Promise.all, and .then returns the values to the object.
 						*/
-						return fetchPromise.get( 'https://hacker-news.firebaseio.com/v0/item/', id )
-						.then( response => {
-							storyBody.setStoryData(JSON.parse(response));
-						}).catch( error => console.log(error) );
+						return fetchPromise.get( 'https://hacker-news.firebaseio.com/v0/item/', id );
 					});
-					if ( storyBody.storyData.length === ids.length ) {
-						resolve( storyBody.storyData )
-					} else {
-						console.log( "storyBody storyData length not full" );
-					}
+					Promise.all( storyArray ).then( values => {
+						values.forEach( response => {
+							storyBody.setStoryData( JSON.parse(response) );
+						});
+						console.log("Promise all after forEach");
+						return resolve(storyBody.storyData);
+					}).catch( error => console.error(error) );
 				})
 			}).catch( error => console.error(error) );
 		},
@@ -31,7 +30,6 @@ const StoryBody = function() {
 		setStoryData: data => {
 			if ( '[object Array]' === Object.prototype.toString.call(storyBody.storyData) && 0 <= storyBody.storyData.length ) {
 				storyBody.storyData.push(data);
-				// console.log(storyBody.storyData);
 			} else {
 				return storyBody.storyData.push( {} );
 			}

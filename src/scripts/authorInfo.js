@@ -6,14 +6,16 @@ const AuthorInfo = function() {
 		getAuthorInfo: ( stories ) => {
 			return new Promise( ( resolve, reject ) => {
 				stories.then( data => {
-					console.log(data);
-					return data.map( singleStory => {
-						fetchPromise.get( 'https://hacker-news.firebaseio.com/v0/user/', singleStory.by )
-						.then( response => {
-							authorInfo.setAuthorInfo( singleStory, JSON.parse(response) );
-						}).catch( error => console.error(error) );
-					})
-				});
+					const storyData = data;
+					const authorArray = storyData.map( singleStory => {
+						return fetchPromise.get( 'https://hacker-news.firebaseio.com/v0/user/', singleStory.by )
+					});
+					Promise.all( authorArray ).then( values => {
+						values.forEach( ( response, index ) => {
+							authorInfo.setAuthorInfo( storyData[index], JSON.parse(response) );
+						})
+					}).catch( error => console.error(error) );
+				}).then( resolved => resolve( authorInfo.authorData ) )
 			}).catch( error => console.error(error) );
 		},
 
@@ -23,11 +25,8 @@ const AuthorInfo = function() {
 
 		setAuthorInfo: ( singleStory, authorObj ) => {
 			if ( '[object Array]' === Object.prototype.toString.call( authorInfo.authorData ) && 0 <= authorInfo.authorData.length ) {
-				console.log(singleStory);
-				console.log(authorObj);
 				singleStory.by = authorObj;
 				authorInfo.authorData.push( singleStory );
-				console.log(authorInfo.authorData);
 			} else {
 				return authorInfo.authorData.push( {} );
 			}
