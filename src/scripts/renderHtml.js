@@ -2,11 +2,15 @@ const RenderHtml = function () {
 	const renderHtml = {
 		parseObjects: richStoryObj => {
 			// Loop through the story objects
-			console.log(richStoryObj);
-			richStoryObj.forEach( ( singleRichStory, storyIndex ) => {
-				renderHtml.createNodes( singleRichStory, storyIndex );
-			});
-			return renderHtml.returnHtml;
+			return new Promise( ( resolve, reject ) => {
+				richStoryObj.then( storyObj => {
+					console.log(storyObj);
+					storyObj.forEach( ( singleRichStory, storyIndex ) => {
+						renderHtml.createNodes( singleRichStory, storyIndex );
+					});
+					resolve(renderHtml.returnHtml);
+				})
+			})
 		},
 		createNodes: ( storyObject, index ) => {
 			// Setup the DOM nodes to attach objects to

@@ -8,6 +8,6 @@ const top = topStoriesSorted.storyArray();
 const stories = top.then( () => storyBodyData.getStoryBody( top ) );
 const authors = stories.then( () => authorInfoData.getAuthorInfo( stories ) );
 const htmlObject = authors.then( () => formattedResponse.sortByScore( authors ) );
-const formattedObj = htmlObject.then( () => render.parseObjects( formattedObj ) );
+Promise.all( htmlObject ).then( render.parseObjects( htmlObject ) );
 
 console.log('JavaScript is amazing!');
