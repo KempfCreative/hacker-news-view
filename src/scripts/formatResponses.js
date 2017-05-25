@@ -1,9 +1,9 @@
 const FormatResponses = function() {
 	const formatResponses = {
 		sortByScore: richStoryPromise => {
-			return richStoryPromise.then( storyPromiseData => {
-				return storyPromiseData.sort( ( a, b ) => b.score - a.score );
-			}).catch( error => console.error(error) );
+            return new Promise( ( resolve, reject ) => {
+		        resolve( richStoryPromise.sort( ( a, b ) => b.score - a.score ) );
+            })
 		}
 	};
 	return formatResponses;

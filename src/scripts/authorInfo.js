@@ -4,20 +4,11 @@ import fetchPromise from './fetchData';
 const AuthorInfo = function() {
 	const authorInfo = {
 		getAuthorInfo: ( stories ) => {
-			return new Promise( ( resolve, reject ) => {
-				stories.then( data => {
-					const storyData = data;
-					const authorArray = storyData.map( singleStory => {
-						return fetchPromise.get( 'https://hacker-news.firebaseio.com/v0/user/', singleStory.by )
-					});
-					Promise.all( authorArray ).then( values => {
-						values.forEach( ( response, index ) => {
-							authorInfo.setAuthorInfo( storyData[index], JSON.parse(response) );
-						})
-						console.log("Promise all AUTHOR after forEach");
-					}).catch( error => console.error(error) );
-				}).then( resolved => resolve( authorInfo.authorData ) )
-			}).catch( error => console.error(error) );
+			console.log(stories);
+			const authorArray = stories.map( singleStory => {
+				return fetchPromise.get( 'https://hacker-news.firebaseio.com/v0/user/', singleStory.by )
+			});
+			return Promise.all( authorArray );
 		},
 
 		authorData: (() => {

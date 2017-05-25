@@ -2,15 +2,10 @@ const RenderHtml = function () {
 	const renderHtml = {
 		parseObjects: richStoryObj => {
 			// Loop through the story objects
-			return new Promise( ( resolve, reject ) => {
-				richStoryObj.then( storyObj => {
-					console.log(storyObj);
-					storyObj.forEach( ( singleRichStory, storyIndex ) => {
-						renderHtml.createNodes( singleRichStory, storyIndex );
-					});
-					resolve(renderHtml.returnHtml);
-				})
-			})
+			richStoryObj.forEach( ( singleRichStory, storyIndex ) => {
+				renderHtml.createNodes( singleRichStory, storyIndex );
+			});
+			return renderHtml.returnHtml;
 		},
 		createNodes: ( storyObject, index ) => {
 			// Setup the DOM nodes to attach objects to
@@ -40,12 +35,12 @@ const RenderHtml = function () {
 					</div>
 				</article>
 			`;
-			renderHtml.returnHtml( storyDomString );
+			return renderHtml.returnHtml += storyDomString;
 		},
-		returnHtml: domNodes => {
+		returnHtml: (() => {
 			// Parse out the full HTML string
-			return domNodes += domNodes;
-		}
+			return '';
+		})()
 	};
 	return renderHtml;
 };
