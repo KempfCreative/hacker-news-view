@@ -24,10 +24,10 @@ const RenderHtml = function () {
 			const storyDomString = `
 				<article class="story-${index}">
 					<span class="story-score">${storyObject.score}</span>
-					<a href="${storyObject.url}" title=${storyObject.title} class="story-link">
-						<h2 class="story-title">${storyObject.title}</a>
+					<a href="${storyObject.url}" title="${storyObject.title}" class="story-link">
+						<h2 class="story-title">${storyObject.title}</h2>
 					</a>
-					<time class="story-published-time" datetime="${new Date(storyObject.time)}">${timeConverter(storyObject.time)}</time>
+					<time class="story-published-time" datetime="${new Date(storyObject.time*1000)}">${timeConverter(storyObject.time)}</time>
 					<div class="author">
 						Submitted by:
 						<a href="#" class="author-id">${storyObject.by.id}</a>
