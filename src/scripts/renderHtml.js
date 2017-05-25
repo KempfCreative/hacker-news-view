@@ -30,7 +30,7 @@ const RenderHtml = function () {
 					<time class="story-published-time" datetime="${new Date(storyObject.time*1000)}">${timeConverter(storyObject.time)}</time>
 					<div class="author">
 						Submitted by:
-						<a href="#" class="author-id">${storyObject.by.id}</a>
+						<span class="author-id">${storyObject.by.id}</span>
 						<span class="author-karma">${storyObject.by.karma}</span>
 					</div>
 				</article>
