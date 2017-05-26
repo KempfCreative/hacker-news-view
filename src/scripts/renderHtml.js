@@ -22,7 +22,7 @@ const RenderHtml = function () {
 			  return time;
 			}
 			const storyDomString = `
-				<article class="story-${index}">
+				<article class="story-item story-${index}">
 					<span class="story-score">${storyObject.score}</span>
 					<a href="${storyObject.url}" title="${storyObject.title}" class="story-link">
 						<h2 class="story-title">${storyObject.title}</h2>

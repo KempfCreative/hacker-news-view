@@ -3,12 +3,14 @@ const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const extractSass = new ExtractTextPlugin({
-    filename: "[name].[contenthash].css",
-    disable: process.env.NODE_ENV === "development"
+    filename: "css/[name].css"
 });
 
 module.exports = {
-    entry: './src/scripts/app.js',
+    entry: [
+        './src/scripts/app.js',
+        './src/stylesheets/main.scss'
+    ],
     module: {
         rules: [
             {
@@ -39,8 +41,8 @@ module.exports = {
         extractSass
     ],
     output: {
-        filename: 'app.js',
-        path: path.resolve(__dirname, 'dist/scripts')
+        filename: 'scripts/app.js',
+        path: path.resolve(__dirname, 'dist')
     },
     devServer: {
         contentBase: path.join(__dirname, "dist"),

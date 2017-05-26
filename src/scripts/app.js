@@ -1,7 +1,6 @@
 import topStoriesSorted from './topStories';
 import storyBodyData from './storyBody';
 import authorInfoData from './authorInfo';
-import formattedResponse from './formatResponses';
 import render from './renderHtml';
 
 topStoriesSorted.storyArray()
@@ -31,8 +30,8 @@ topStoriesSorted.storyArray()
                         console.log( sortedStories );
                         const storiesString = render.parseObjects( sortedStories );
                         document.getElementById( 'news-main' ).innerHTML = storiesString;
-                    })
-            })
+                    });
+            });
     });
 
 console.log('JavaScript is amazing!');
