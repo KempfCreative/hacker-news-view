@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -103,11 +103,11 @@ exports.default = fetchPromise;
 "use strict";
 
 
-var _topStories = __webpack_require__(7);
+var _topStories = __webpack_require__(6);
 
 var _topStories2 = _interopRequireDefault(_topStories);
 
-var _storyBody = __webpack_require__(6);
+var _storyBody = __webpack_require__(5);
 
 var _storyBody2 = _interopRequireDefault(_storyBody);
 
@@ -115,11 +115,7 @@ var _authorInfo = __webpack_require__(3);
 
 var _authorInfo2 = _interopRequireDefault(_authorInfo);
 
-var _formatResponses = __webpack_require__(4);
-
-var _formatResponses2 = _interopRequireDefault(_formatResponses);
-
-var _renderHtml = __webpack_require__(5);
+var _renderHtml = __webpack_require__(4);
 
 var _renderHtml2 = _interopRequireDefault(_renderHtml);
 
@@ -219,32 +215,6 @@ exports.default = authorInfoData;
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-var FormatResponses = function FormatResponses() {
-	var formatResponses = {
-		sortByScore: function sortByScore(richStoryPromise) {
-			return new Promise(function (resolve, reject) {
-				resolve(richStoryPromise.sort(function (a, b) {
-					return b.score - a.score;
-				}));
-			});
-		}
-	};
-	return formatResponses;
-};
-
-var formattedResponse = new FormatResponses();
-exports.default = formattedResponse;
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
 var RenderHtml = function RenderHtml() {
 	var renderHtml = {
 		parseObjects: function parseObjects(richStoryObj) {
@@ -283,7 +253,7 @@ var render = new RenderHtml();
 exports.default = render;
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -331,7 +301,7 @@ var storyBodyData = new StoryBody();
 exports.default = storyBodyData;
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -375,7 +345,7 @@ var topStoriesSorted = new TopStories();
 exports.default = topStoriesSorted;
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
