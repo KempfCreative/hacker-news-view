@@ -32,49 +32,97 @@ p {
 .news-main {
   display: grid;
   margin: 0 auto;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 30px 10px;
   grid-auto-rows: minmax(150px, auto);
 }
 
 .story-item {
   /* needed for the flex layout*/
+  position: relative;
   margin-left: 5px;
   margin-right: 5px;
   flex: 1 1 200px;
   font-family: 'Lato', sans-serif;
+  border: 5px solid #65b4db;
 }
 
 .story-score {
-
+  display: block;
+  position: relative;
+  z-index: 30;
+  &:before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 20px 40px 20px;
+    border-color: transparent transparent #000;
+    left: 15px;
+    top: -10px;
+    position: absolute;
+    z-index: -10;
+  }
 }
 
 .story-link {
-
+  text-decoration: none;
+  display: inline-block;
 }
 
 .story-title {
-
+  color: #00ffdb;
+  line-height: 1.2em;
+  margin: 0.5em 0 0 0;
 }
 
 .story-published-time {
-
+  font-size: 0.4em;
+  text-align: left;
+  display: inline-block;
+  padding: 3px;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  letter-spacing: 0.4em;
 }
 
 .author {
-
+  font-size: 0.8em;
+  margin: 15px 0 0 0;
+  color: #ecd8e9;
+  &>a {
+    color: #ecd8e9;
+  }
 }
 
 .author-id {
-
+  font-weight: 700;
 }
 
 .author-karma {
-
+  color: black;
+  font-size: 0.6em;
+  padding: 3px;
+  background-color: yellow;
+  margin: 0 0 0 10px;
+  position: relative;
+  &:before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px 5px 5px 0px;
+    border-color: transparent yellow transparent transparent;
+    left: -5px;
+    position: absolute;
+    top: 5px;
+  }
 }
+
 .header {
    margin: 0 auto;
   .header-sub {
-     font-size: 4em;
+     font-size: calc(0.75em + 10vw);
      font-family: 'Damion', cursive;
      color: #f465e3;
      text-shadow: -10px 9px 2px black;
@@ -83,7 +131,7 @@ p {
      text-align: center;
   }
   .header-pop {
-    font-size: 10em;
+    font-size: calc(0.75em + 25vmin);
     font-family: 'Changa One', cursive;
     color: #959595;
     margin-top: -0.5em;
@@ -95,7 +143,6 @@ p {
 
 
 .news-main > * {
-  background-color: #444;
   color: #fff;
   border-radius: 5px;
   padding: 20px;
