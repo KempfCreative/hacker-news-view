@@ -5,7 +5,7 @@ const TopStories = function () {
     storyArray: () => {
       return fetchPromise.get( 'https://hacker-news.firebaseio.com/v0/topstories.json' )
       .then( response => {
-        const topStoriesArray = response.slice(1,response.length-1).split(',');
+        const topStoriesArray = response;
         let topTen,
             topTenObj = {};
         // Pick out 10 random numbers 0 - response.length-1

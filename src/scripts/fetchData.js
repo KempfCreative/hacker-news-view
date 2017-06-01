@@ -5,9 +5,11 @@ const FetchData = function () {
         const urlPath = undefined !== optionalId && optionalId.length > 0 ? `${url}${optionalId}.json` : url;
         const xhr = new XMLHttpRequest();
         xhr.addEventListener( 'load', function (event) {
-          resolve(this.responseText);
+          console.log(this);
+          resolve(this.response);
         } );
         xhr.open( 'GET', urlPath );
+        xhr.responseType = 'json';
         xhr.send();
       });
     }
