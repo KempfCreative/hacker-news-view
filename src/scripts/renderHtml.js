@@ -21,11 +21,17 @@ const RenderHtml = function () {
 			  var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
 			  return time;
 			}
+
+			const url = storyObject.hasOwnProperty('url') ? storyObject.url : `https://news.ycombinator.com/item?id=${storyObject.id}`;
 			const storyDomString = `
 				<article class="story-item story-${index}">
 					<span class="story-score">${storyObject.score}</span>
-					<a href="${storyObject.url}" title="${storyObject.title}" class="story-link">
+					<a href="${url}" title="${storyObject.title}" class="story-link">
 						<h2 class="story-title">${storyObject.title}</h2>
+					</a>
+					<a href="https://news.ycombinator.com/item?id=${storyObject.id}" class="comments-link">
+						<span class="comment-number">${storyObject.descendants}</span>
+						<span class="comment-text">comments</span>
 					</a>
 					<time class="story-published-time" datetime="${new Date(storyObject.time*1000)}">${timeConverter(storyObject.time)}</time>
 					<div class="author">
